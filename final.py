@@ -18,8 +18,11 @@ trim=list()
 s=''
 con=""
 wps=int(input('input your desired words/second\n'))
-
-script=YouTubeTranscriptApi.get_transcript('rqSeutfwb2Q')
+url=input('Insert the video link here\n')
+idpos=url.find("v=")+2
+id=url[idpos:]
+print(id)
+script=YouTubeTranscriptApi.get_transcript(id)
 # print(script)
 for segs in script: #create two lists, one with the number of words in each segment, the other for the time for each segment (to plot the wps graph)
     words=0
@@ -61,6 +64,68 @@ while j < len(tseg):
 # del(t[0]) #delete me, only for santar
 print (len(t),len(vf))
 print("Time Stamps:",t,"\n","Speed Factor:",vf)
+
+f = open('Langi.html','w')
+
+content ="""<!DOCTYPE html>
+<html>
+<body>
+<button onclick="setTest()" type="button">Test Func</button>
+<button onclick="getPlaySpeed()" type="button">playback speed</button>
+<button onclick="getTime()" type="button">video time</button><br>
+
+<video id="myVideo" width="320" height="176" controls>
+    <source src="clip.mp4" type="video/mp4">
+error
+</video>
+
+
+<script>
+
+var vid = document.getElementById("myVideo");
+
+function getPlaySpeed() {
+  alert(vid.playbackRate);
+}
+
+function setTest() {
+  vid.playbackRate = 3;
+
+  if (vid.currentTime==50) {
+  vid.playbackRate = 0.5;
+  }
+}
+
+function getTime() {
+  alert(vid.currentTime);
+}
+
+var Stamps =%s ;
+var Speed  = %s;
+var i = 0;
+
+var test = 0;
+var interval;
+
+function check_test() {
+console.log( vid.currentTime );
+    if(vid.currentTime >= Stamps[i] && vid.currentTime < Stamps[i+1]){
+		vid.playbackRate = Speed[i];
+        console.log( "Time now: " + Stamps[i] + "Speed: " + Speed[i]);
+		i = i + 1;
+    }
+}
+
+interval = window.setInterval( check_test, 1 );
+
+</script>
+
+</body>
+</html>
+"""%(t,vf)
+
+f.write(content)
+f.close()
 
 # plt.plot(tseg, w)
 #
