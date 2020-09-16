@@ -64,11 +64,9 @@ f = open('Langi.html','w')
 content ="""<!DOCTYPE html>
 <html>
 <body>
-<button onclick="setTest()" type="button">Test Func</button>
-<button onclick="getPlaySpeed()" type="button">playback speed</button>
-<button onclick="getTime()" type="button">video time</button><br>
 
-<video id="myVideo" width="320" height="176" controls>
+
+<video id="myVideo" width="500" height="400" controls>
     <source src="clip.mp4" type="video/mp4">
 error
 </video>
@@ -80,14 +78,6 @@ var vid = document.getElementById("myVideo");
 
 function getPlaySpeed() {
   alert(vid.playbackRate);
-}
-
-function setTest() {
-  vid.playbackRate = 3;
-
-  if (vid.currentTime==50) {
-  vid.playbackRate = 0.5;
-  }
 }
 
 function getTime() {
