@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+
+<video id="myVideo" width="500" height="400" controls>
+    <source src="clip.mp4" type="video/mp4">
+error
+</video>
+
+
+<script>
+
+var vid = document.getElementById("myVideo");
+
+function getPlaySpeed() {
+  alert(vid.playbackRate);
+}
+
+function getTime() {
+  alert(vid.currentTime);
+}
+
+var Stamps =[0, 0.16, 2.7, 5.1, 10.1, 15.1, 19.5, 22.3, 29.5, 31.7, 65.0, 69.1, 73.8, 75.8, 78.9, 79.9, 81.9, 86.9, 91.4] ;
+var Speed  = [1, 0.635, 0.5333333333333332, 0.6666666666666666, 0.625, 0.5866666666666667, 0.5600000000000002, 0.7578947368421052, 0.6285714285714283, 3.6999999999999997, 0.6307692307692299, 0.9400000000000006, 0.5714285714285714, 0.516666666666668, 1, 0.6666666666666666, 0.7142857142857143, 0.9];
+var i = 0;
+
+var test = 0;
+var interval;
+
+function check_test() {
+console.log( vid.currentTime );
+    if(vid.currentTime >= Stamps[i] && vid.currentTime < Stamps[i+1]){
+		vid.playbackRate = Speed[i];
+        console.log( "Time now: " + Stamps[i] + "Speed: " + Speed[i]);
+		i = i + 1;
+    }
+}
+
+interval = window.setInterval( check_test, 1 );
+
+</script>
+
+</body>
+</html>
